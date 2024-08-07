@@ -1,0 +1,24 @@
+# Example root argo app manifest.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ''
+  namespace: ''
+spec:
+  project: ''
+  source:
+    repoURL: ''
+    targetRevision: master
+    # path to the directory containing the application manifests
+    path: ''
+    directory:
+      recurse: true # finds all yaml files in subdirectories
+      exclude: '{_*.yaml,_*.yml,*RootArgoApp.yaml,*RootArgoApp.yml}' # do not manage root apps and _ files
+      # include: '*.yaml'
+  destination:
+    name: ''
+    namespace: ''
+  syncPolicy:
+    automated: 
+      prune: false
+      selfHeal: true

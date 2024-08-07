@@ -1,0 +1,23 @@
+# Example root argo app manifest.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-of-root-argo-dev-instance
+  namespace: openshift-gitops
+spec:
+  project: ''
+  source:
+    repoURL: ''
+    targetRevision: master
+    # path to the directory containing the application manifests
+    path: ""
+    directory:
+      recurse: true # finds all yaml files in subdirectories
+      include: '{**/clusterRootArgoApp.yaml,_projects/*.yaml}'
+  destination:
+    name: ''
+    namespace: ''
+  syncPolicy:
+    automated: 
+      prune: false
+      selfHeal: true
